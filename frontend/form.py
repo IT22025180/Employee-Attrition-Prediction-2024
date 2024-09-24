@@ -1,120 +1,164 @@
 import streamlit as st
+import numpy as np
+from urllib.parse import urlparse,parse_qs
 
-# Title of the app
-st.title('Employee Attrition Predictor')
+def get_query_params():
+    
+    query_params = st.query_params
+    return query_params.get("page", ["input"])[0]
 
-age = st.selectbox(
-    'Choose your age:',
-    ['18', '19', '20', '21', '22','23','24','25','26','27','28',
-     '29','30','31','32','33','34','35','36','37','38',
-     '39','40','41','42','43','44','45','46','47','48',
-     '49','50','51','52','53','54','55','56','57','58','59','60']
-)
+def display_page():
+    current_page = get_query_params()
 
-dailyRate = st.number_input(
-    'Enter your daily rate:',
-    min_value=0,      # Minimum value allowed
-    key='dailyRate'
-)
+    if current_page == 'input':
+        st.title('Employee Attrition Predictor')
+        input_data = user_input_form()
+        if st.button('Predict'):
+            st.session_state['input_data'] = input_data
+            # st.experimental_set_query_params(page='result')
+   
+    elif current_page == 'result':
+        import result
 
-department = st.selectbox(
-    'Choose your department:',
-    ['Sales', 'Research & Development', 'Human Resources']
-)
+def user_input_form():
+    Age = st.selectbox(
+        'Choose your age:',
+        ['18', '19', '20', '21', '22','23','24','25','26','27','28',
+        '29','30','31','32','33','34','35','36','37','38',
+        '39','40','41','42','43','44','45','46','47','48',
+        '49','50','51','52','53','54','55','56','57','58','59','60']
+    )
+    st.text(Age)
 
-distfromhome = st.number_input(
-    'Enter distance in KM:',
-    min_value=0,      # Minimum value allowed
-    max_value=100,    # Maximum value allowed
-    step=1,            # Step size
-    key='distfromhome'
-)
+    DailyRate = st.number_input(
+        'Enter your daily rate:',
+        min_value=0,      # Minimum value allowed
+        key='dailyRate'
+    )
+    st.text(DailyRate)
 
-envstatis = st.selectbox(
-    'Choose your environment satisfaction:',
-    ['4', '3', '2', '1']
-)
+    Department = st.selectbox(
+        'Choose your department:',
+        ['Sales', 'Research & Development', 'Human Resources']
+    )
+    st.text(Department)
 
-gender = st.selectbox(
-    'Gender:',
-    ['Male', 'Female']
-)
+    DistanceFromHome = st.number_input(
+        'Enter distance in KM:',
+        min_value=0,      # Minimum value allowed
+        max_value=100,    # Maximum value allowed
+        step=1,            # Step size
+        key='distfromhome'
+    )
+    st.text(DistanceFromHome)
 
-joblevel = st.selectbox(
-    'Choose your job level:',
-    ['5', '4', '3', '2', '1']
-)
+    EnvironmentSatisfaction = st.selectbox(
+        'Choose your environment satisfaction:',
+        ['4', '3', '2', '1']
+    )
+    st.text(EnvironmentSatisfaction)
 
-jobrole = st.selectbox(
-    'Choose your job role:',
-    ['Sales Executive', 'Research Scientist', 'Laboratory Technician', 'Manufacturing Director', 'Healthcare Representative','Manager','Sales Representative','Research Director','Human Resources']
-)
+    Gender = st.selectbox(
+        'Gender:',
+        ['Male', 'Female']
+    )
+    st.text(Gender)
 
-jobstatisfact = st.selectbox(
-    'Choose your job satisfaction:',
-    ['4', '3', '2', '1']
-)
+    JobLevel = st.selectbox(
+        'Choose your job level:',
+        ['5', '4', '3', '2', '1']
+    )
+    st.text(JobLevel)
 
-maritalstatus = st.selectbox(
-    'Choose your marital status:',
-    ['Single', 'Married', 'Divorced']
-)
+    JobRole = st.selectbox(
+        'Choose your job role:',
+        ['Sales Executive', 'Research Scientist', 'Laboratory Technician', 'Manufacturing Director', 'Healthcare Representative','Manager','Sales Representative','Research Director','Human Resources']
+    )
+    st.text(JobRole)
 
-monthlyrate = st.number_input(
-    'Enter your monthly rate:',
-    min_value=0,      # Minimum value allowed
-    key = 'monthlyrate'
-)
+    JobSatisfaction = st.selectbox(
+        'Choose your job satisfaction:',
+        ['4', '3', '2', '1']
+    )
+    st.text(JobSatisfaction)
 
-numOfComp = st.selectbox(
-    'Number of companies work with:',
-    ['1', '2', '3', '4', '5','6','7','8','9','10']
-)
+    MaritalStatus = st.selectbox(
+        'Choose your marital status:',
+        ['Single', 'Married', 'Divorced']
+    )
+    st.text(MaritalStatus)
 
-ot = st.selectbox(
-    'Choose your over time:',
-    ['Yes', 'No']
-)
+    MonthlyIncome = st.number_input(
+        'Enter your monthly income:',
+        min_value=0,      # Minimum value allowed
+        key = 'monthlyincome'
+    )
+    st.text(MonthlyIncome)
 
-totalworkyrs = st.number_input(
-    'Enter distance in KM:',
-    min_value=0,      # Minimum value allowed
-    max_value=20,    # Maximum value allowed
-    step=1,            # Step size
-    key='totalworkyrs'
-)
+    MonthlyRate = st.number_input(
+        'Enter your monthly rate:',
+        min_value=0,      # Minimum value allowed
+        key = 'monthlyrate'
+    )
+    st.text(MonthlyRate)
 
-workLifeBalance = st.selectbox(
-    'Choose your work life balance:',
-    ['4', '3', '2', '1']
-)
+    NumCompaniesWorked = st.selectbox(
+        'Number of companies work with:',
+        ['1', '2', '3', '4', '5','6','7','8','9','10']
+    )
+    st.text(NumCompaniesWorked)
 
-yrsAtcompany = st.number_input(
-    'Enter distance in KM:',
-    min_value=0,      # Minimum value allowed
-    max_value=20,    # Maximum value allowed
-    step=1,         # Step size
-    key='yrsAtcompany'
-)
+    OverTime = st.selectbox(
+        'Choose your over time:',
+        ['Yes', 'No']
+    )
+    st.text(OverTime)
 
-yearsInCurrentRole = st.selectbox(
-    'Choose your years in current role:',
-    ['1', '2', '3', '4', '5','6','7','8','9','10',
-     '11','12','13','14','15','16','17','18','19','20']
-)
+    TotalWorkingYears = st.number_input(
+        'Enter distance in KM:',
+        min_value=0,      # Minimum value allowed
+        max_value=20,    # Maximum value allowed
+        step=1,            # Step size
+        key='totalworkyrs'
+    )
+    st.text(TotalWorkingYears)
 
-yearsSinceLastPromotion = st.selectbox(
-    'Choose your year since last promotion:',
-    ['0', '1', '2', '3', '4','5','6','7','8','9','10','11','12','13','14','15']
-)
+    WorkLifeBalance = st.selectbox(
+        'Choose your work life balance:',
+        ['4', '3', '2', '1']
+    )
+    st.text(WorkLifeBalance)
 
-if st.button('View result'):
-    st.success('message')
+    YearsAtCompany = st.number_input(
+        'Years at company:',
+        min_value=0,      # Minimum value allowed
+        max_value=20,    # Maximum value allowed
+        step=1,         # Step size
+        key='yrsAtcompany'
+    )
+    st.text(YearsAtCompany)
 
-# Display the selected options
-# st.write(f'You selected:')
-# st.write(f'Category: {category}')
-# st.write(f'Size: {size}')
-# st.write(f'Color: {color}')
+    YearsInCurrentRole = st.selectbox(
+        'Choose your years in current role:',
+        ['1', '2', '3', '4', '5','6','7','8','9','10',
+        '11','12','13','14','15','16','17','18','19','20']
+    )
+    st.text(YearsInCurrentRole)
 
-st.balloons()
+    YearsSinceLastPromotion = st.selectbox(
+        'Choose your year since last promotion:',
+        ['0', '1', '2', '3', '4','5','6','7','8','9','10','11','12','13','14','15']
+    )
+    st.text(YearsSinceLastPromotion)
+
+    inputs = {
+        'Age': Age, 'DailyRate': DailyRate, 'Department': Department, 'DistanceFromHome': DistanceFromHome,
+        'EnvironmentSatisfaction': EnvironmentSatisfaction, 'Gender': Gender, 'JobLevel': JobLevel, 'JobRole': JobRole,
+        'JobSatisfaction': JobSatisfaction, 'MaritalStatus': MaritalStatus,'MonthlyIncome': MonthlyIncome, 'MonthlyRate': MonthlyRate,
+        'NumCompaniesWorked': NumCompaniesWorked, 'OverTime': OverTime, 'TotalWorkingYears': TotalWorkingYears, 'WorkLifeBalance': WorkLifeBalance,
+        'YearsAtCompany': YearsAtCompany, 'YearsInCurrentRole': YearsInCurrentRole, 'YearsSinceLastPromotion': YearsSinceLastPromotion
+    }
+
+    return inputs
+
+display_page()
