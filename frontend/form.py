@@ -184,19 +184,56 @@ def user_input_form():
         st.session_state['input_data'] = input_data
 
 # Function to display prediction results
+# def display_result():
+#     input_data = st.session_state.get('input_data', None)
+
+#     if input_data:
+#         # Convert the inputs to a NumPy array
+#         data_to_predict = np.array([
+#             input_data['Age'], input_data['DailyRate'], input_data['Department'], input_data['DistanceFromHome'],
+#             input_data['EnvironmentSatisfaction'], input_data['Gender'], input_data['JobLevel'], input_data['JobRole'],
+#             input_data['JobSatisfaction'], input_data['MaritalStatus'], input_data['MonthlyIncome'], input_data['MonthlyRate'],
+#             input_data['NumCompaniesWorked'], input_data['OverTime'], input_data['TotalWorkingYears'],
+#             input_data['WorkLifeBalance'], input_data['YearsAtCompany'], input_data['YearsInCurrentRole'],
+#             input_data['YearsSinceLastPromotion']
+#         ]).reshape(1, -1)
+
+#         # Use predict_proba to get the probabilities
+#         probabilities = model.predict_proba(data_to_predict)[0]
+        
+#         # Set a threshold, e.g., 0.5 to classify the employee as likely to leave
+#         leave_probability = probabilities[1]
+        
+#         # Display the probability and prediction result
+#         st.write(f"Probability of leaving: {leave_probability * 100:.2f}%")
+        
+#         if leave_probability >= 0.5:  # You can adjust this threshold based on model calibration
+#             st.success('This employee is likely to leave.')
+#         else:
+#             st.success('This employee is likely to stay.')
+#     else:
+#         st.warning('Please fill out the form first.')
+
 def display_result():
     input_data = st.session_state.get('input_data', None)
 
     if input_data:
-        # Convert the inputs to a NumPy array
-        data_to_predict = np.array([
+        # List of feature names (ensure these match the columns used in model training)
+        feature_names = ['Age', 'DailyRate', 'Department', 'DistanceFromHome', 'EnvironmentSatisfaction',
+                         'Gender', 'JobLevel', 'JobRole', 'JobSatisfaction', 'MaritalStatus', 
+                         'MonthlyIncome', 'MonthlyRate', 'NumCompaniesWorked', 'OverTime', 
+                         'TotalWorkingYears', 'WorkLifeBalance', 'YearsAtCompany', 'YearsInCurrentRole',
+                         'YearsSinceLastPromotion']
+
+        # Convert the input data to a DataFrame with appropriate feature names
+        data_to_predict = pd.DataFrame([[
             input_data['Age'], input_data['DailyRate'], input_data['Department'], input_data['DistanceFromHome'],
             input_data['EnvironmentSatisfaction'], input_data['Gender'], input_data['JobLevel'], input_data['JobRole'],
             input_data['JobSatisfaction'], input_data['MaritalStatus'], input_data['MonthlyIncome'], input_data['MonthlyRate'],
             input_data['NumCompaniesWorked'], input_data['OverTime'], input_data['TotalWorkingYears'],
             input_data['WorkLifeBalance'], input_data['YearsAtCompany'], input_data['YearsInCurrentRole'],
             input_data['YearsSinceLastPromotion']
-        ]).reshape(1, -1)
+        ]], columns=feature_names)
 
         # Use predict_proba to get the probabilities
         probabilities = model.predict_proba(data_to_predict)[0]
@@ -213,7 +250,6 @@ def display_result():
             st.success('This employee is likely to stay.')
     else:
         st.warning('Please fill out the form first.')
-
 
 
 def main():
