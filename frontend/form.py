@@ -45,14 +45,14 @@ def user_input_form():
             '39','40','41','42','43','44','45','46','47','48',
             '49','50','51','52','53','54','55','56','57','58','59','60']
         )
-        st.text(Age)
+        
 
         DailyRate = st.number_input(
             'Enter your daily rate:',
             min_value=0,      # Minimum value allowed
             key='dailyRate'
         )
-        st.text(DailyRate)
+        
 
         Department = st.selectbox(
             'Choose your department:',
@@ -64,7 +64,7 @@ def user_input_form():
             Department = 1
         elif Department == 'Human Resources':
             Department = 0
-        st.text(Department)
+        
 
 
         DistanceFromHome = st.number_input(
@@ -74,13 +74,13 @@ def user_input_form():
             step=1,            # Step size
             key='distfromhome'
         )
-        st.text(DistanceFromHome)
+        
 
         EnvironmentSatisfaction = st.selectbox(
             'Choose your environment satisfaction:',
             ['4', '3', '2', '1']
         )
-        st.text(EnvironmentSatisfaction)
+        
 
         Gender = st.selectbox(
             'Gender:',
@@ -90,13 +90,13 @@ def user_input_form():
             Gender = 1
         elif Gender == 'Female':
             Gender = 0
-        st.text(Gender)
+        
 
         JobLevel = st.selectbox(
             'Choose your job level:',
             ['5', '4', '3', '2', '1']
         )
-        st.text(JobLevel)
+        
 
         JobRole = st.selectbox(
             'Choose your job role:',
@@ -122,13 +122,13 @@ def user_input_form():
             JobRole = 1
         elif JobRole == 'Sales Executive':
             JobRole = 0
-        st.text(JobRole)
+        
 
         JobSatisfaction = st.selectbox(
             'Choose your job satisfaction:',
             ['4', '3', '2', '1']
         )
-        st.text(JobSatisfaction)
+        
 
         MaritalStatus = st.selectbox(
             'Choose your marital status:',
@@ -140,27 +140,27 @@ def user_input_form():
             MaritalStatus = 1
         elif MaritalStatus == 'Single':
             MaritalStatus = 0
-        st.text(MaritalStatus)
+        
 
         MonthlyIncome = st.number_input(
             'Enter your monthly income:',
             min_value=0,      # Minimum value allowed
             key = 'monthlyincome'
         )
-        st.text(MonthlyIncome)
+        
 
         MonthlyRate = st.number_input(
             'Enter your monthly rate:',
             min_value=0,      # Minimum value allowed
             key = 'monthlyrate'
         )
-        st.text(MonthlyRate)
+        
 
         NumCompaniesWorked = st.selectbox(
             'Number of companies work with:',
             ['1', '2', '3', '4', '5','6','7','8','9','10']
         )
-        st.text(NumCompaniesWorked)
+        
 
         OverTime = st.selectbox(
             'Do you work overtime?',
@@ -170,7 +170,7 @@ def user_input_form():
             OverTime = 1
         elif OverTime == 'No':
             OverTime = 0
-        st.text(OverTime)
+        
 
         TotalWorkingYears = st.number_input(
             'Total working years:',
@@ -179,13 +179,13 @@ def user_input_form():
             step=1,            # Step size
             key='totalworkyrs'
         )
-        st.text(TotalWorkingYears)
+        
 
         WorkLifeBalance = st.selectbox(
             'Choose your work life balance:',
             ['4', '3', '2', '1']
         )
-        st.text(WorkLifeBalance)
+        
 
         YearsAtCompany = st.number_input(
             'Years at company:',
@@ -194,20 +194,20 @@ def user_input_form():
             step=1,         # Step size
             key='yrsAtcompany'
         )
-        st.text(YearsAtCompany)
+        
 
         YearsInCurrentRole = st.selectbox(
             'Choose your years in current role:',
             ['0', '1', '2', '3', '4', '5','6','7','8','9','10',
             '11','12','13','14','15','16','17','18','19','20']
         )
-        st.text(YearsInCurrentRole)
+        
 
         YearsSinceLastPromotion = st.selectbox(
             'Choose your year since last promotion:',
             ['0', '1', '2', '3', '4','5','6','7','8','9','10','11','12','13','14','15']
         )
-        st.text(YearsSinceLastPromotion)
+        
 
         submitted = st.form_submit_button("Predict")
 
