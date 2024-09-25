@@ -55,9 +55,15 @@ def user_input_form():
         st.text(DailyRate)
 
         Department = st.selectbox(
-            'Choose your department (Sales: 2, Research & Development: 1, Human Resources: 0):',
-            ['0', '1', '2']
+            'Choose your department:',
+            ['Sales', 'Research & Development', 'Human Resources']
         )
+        if Department == 'Sales':
+            Department = 2
+        elif Department == 'Research & Development':
+            Department = 1
+        elif Department == 'Human Resources':
+            Department = 0
         st.text(Department)
 
 
@@ -78,8 +84,12 @@ def user_input_form():
 
         Gender = st.selectbox(
             'Gender:',
-            ['0', '1']
+            ['Male', 'Female']
         )
+        if Gender == 'Male':
+            Gender = 1
+        elif Gender == 'Female':
+            Gender = 0
         st.text(Gender)
 
         JobLevel = st.selectbox(
@@ -90,8 +100,28 @@ def user_input_form():
 
         JobRole = st.selectbox(
             'Choose your job role:',
-            ['0', '1', '2', '3', '4','5','6','7','8']
+            ['Human Resources', 'Research Director', 'Sales Representative', 'Manager', 
+             'Healthcare Representative', 'Manufacturing Director', 'Laboratory Technician', 
+             'Research Scientist', 'Sales Executive']
         )
+        if JobRole == 'Human Resources':
+            JobRole = 8
+        elif JobRole == 'Research Director':
+            JobRole = 7
+        elif JobRole == 'Sales Representative':
+            JobRole = 6
+        elif JobRole == 'Manager':
+            JobRole = 5
+        elif JobRole == 'Healthcare Representative':
+            JobRole = 4
+        elif JobRole == 'Manufacturing Director':
+            JobRole = 3
+        elif JobRole == 'Laboratory Technician':
+            JobRole = 2
+        elif JobRole == 'Research Scientist':
+            JobRole = 1
+        elif JobRole == 'Sales Executive':
+            JobRole = 0
         st.text(JobRole)
 
         JobSatisfaction = st.selectbox(
@@ -102,8 +132,14 @@ def user_input_form():
 
         MaritalStatus = st.selectbox(
             'Choose your marital status:',
-            ['0', '1', '2']
+            ['Married', 'Divorced', 'Single']
         )
+        if MaritalStatus == 'Married':
+            MaritalStatus = 2
+        elif MaritalStatus == 'Divorced':
+            MaritalStatus = 1
+        elif MaritalStatus == 'Single':
+            MaritalStatus = 0
         st.text(MaritalStatus)
 
         MonthlyIncome = st.number_input(
@@ -127,9 +163,13 @@ def user_input_form():
         st.text(NumCompaniesWorked)
 
         OverTime = st.selectbox(
-            'Choose your over time:',
-            ['0', '1']
+            'Do you work overtime?',
+            ['Yes', 'No']
         )
+        if OverTime == 'Yes':
+            OverTime = 1
+        elif OverTime == 'No':
+            OverTime = 0
         st.text(OverTime)
 
         TotalWorkingYears = st.number_input(
@@ -158,7 +198,7 @@ def user_input_form():
 
         YearsInCurrentRole = st.selectbox(
             'Choose your years in current role:',
-            ['1', '2', '3', '4', '5','6','7','8','9','10',
+            ['0', '1', '2', '3', '4', '5','6','7','8','9','10',
             '11','12','13','14','15','16','17','18','19','20']
         )
         st.text(YearsInCurrentRole)
