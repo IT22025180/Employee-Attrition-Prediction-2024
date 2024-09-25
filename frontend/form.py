@@ -2,6 +2,7 @@ import streamlit as st
 import numpy as np
 from urllib.parse import urlparse,parse_qs
 import joblib
+import pandas as pd
 
 def load_model():
     try:
@@ -54,8 +55,8 @@ def user_input_form():
         st.text(DailyRate)
 
         Department = st.selectbox(
-            'Choose your department:',
-            ['2', '1', '0']
+            'Choose your department (Sales: 2, Research & Development: 1, Human Resources: 0):',
+            ['0', '1', '2']
         )
         st.text(Department)
 
@@ -77,7 +78,7 @@ def user_input_form():
 
         Gender = st.selectbox(
             'Gender:',
-            ['1', '0']
+            ['0', '1']
         )
         st.text(Gender)
 
@@ -101,7 +102,7 @@ def user_input_form():
 
         MaritalStatus = st.selectbox(
             'Choose your marital status:',
-            ['2', '1', '0']
+            ['0', '1', '2']
         )
         st.text(MaritalStatus)
 
@@ -127,7 +128,7 @@ def user_input_form():
 
         OverTime = st.selectbox(
             'Choose your over time:',
-            ['1', '0']
+            ['0', '1']
         )
         st.text(OverTime)
 
@@ -185,7 +186,7 @@ def user_input_form():
 # Function to display prediction results
 def display_result():
     input_data = st.session_state.get('input_data', None)
-    
+
     if input_data:
         # Convert the inputs to a NumPy array
         data_to_predict = np.array([
@@ -196,17 +197,23 @@ def display_result():
             input_data['WorkLifeBalance'], input_data['YearsAtCompany'], input_data['YearsInCurrentRole'],
             input_data['YearsSinceLastPromotion']
         ]).reshape(1, -1)
+
+        # Use predict_proba to get the probabilities
+        probabilities = model.predict_proba(data_to_predict)[0]
         
-        # Prediction
-        prediction = model.predict(data_to_predict)[0]
+        # Set a threshold, e.g., 0.5 to classify the employee as likely to leave
+        leave_probability = probabilities[1]
         
-        # Display result
-        if prediction == 1:
+        # Display the probability and prediction result
+        st.write(f"Probability of leaving: {leave_probability * 100:.2f}%")
+        
+        if leave_probability >= 0.5:  # You can adjust this threshold based on model calibration
             st.success('This employee is likely to leave.')
         else:
             st.success('This employee is likely to stay.')
     else:
         st.warning('Please fill out the form first.')
+
 
 
 def main():
