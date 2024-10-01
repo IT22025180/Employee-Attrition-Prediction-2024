@@ -3,12 +3,14 @@ import numpy as np
 from urllib.parse import urlparse,parse_qs
 import joblib
 import pandas as pd
+import os
 
 st.set_page_config(page_title="Employee Attrition Predictor 2024")
 
 def load_model():
+    model_path = os.path.join(os.path.dirname(__file__), 'classification_model.pkl')
     try:
-        return joblib.load('classification_model.pkl')
+        return joblib.load(model_path)
     except FileNotFoundError:
         st.error("Model file not found. Please ensure 'classification_model.pkl' is in the correct directory.")
         st.stop()
