@@ -4,7 +4,7 @@ from urllib.parse import urlparse,parse_qs
 import joblib
 import pandas as pd
 
-st.set_page_config(page_title="Employee Attrition Predictor 2024", layout="wide")
+st.set_page_config(page_title="Employee Attrition Predictor 2024")
 
 def load_model():
     try:
