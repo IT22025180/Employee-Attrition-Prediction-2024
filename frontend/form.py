@@ -259,14 +259,17 @@ def display_result():
         st.header("Final Result :")
         st.write(f"Probability of leaving: {leave_probability * 100:.2f}%")
         
+        sad_img_path = os.path.join(os.path.dirname(__file__), 'sadimg.png')
+        happy_img_path = os.path.join(os.path.dirname(__file__), 'happyimg.png')
+
         if leave_probability >= 0.5:  # You can adjust this threshold based on model calibration
             st.error('This employee is likely to **Leave**.')
-            st.image('sadimg.png', use_column_width=True)
+            st.image(sad_img_path, use_column_width=True)
             st.snow()
             
         else:
             st.success('This employee is likely to **Stay**.')
-            st.image('happyimg.png', use_column_width=True)
+            st.image(happy_img_path, use_column_width=True)
             st.balloons()
     else:
         st.warning('Please fill out the form first.')
