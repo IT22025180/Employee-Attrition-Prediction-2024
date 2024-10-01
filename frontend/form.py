@@ -256,12 +256,12 @@ def display_result():
         st.write(f"Probability of leaving: {leave_probability * 100:.2f}%")
         
         if leave_probability >= 0.5:  # You can adjust this threshold based on model calibration
-            st.error('This employee is likely to leave.')
+            st.error('This employee is likely to **Leave**.')
             st.image('sadimg.png', use_column_width=True)
             st.snow()
             
         else:
-            st.success('This employee is likely to stay.')
+            st.success('This employee is likely to **Stay**.')
             st.image('happyimg.png', use_column_width=True)
             st.balloons()
     else:
