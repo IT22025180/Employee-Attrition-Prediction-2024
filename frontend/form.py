@@ -10,7 +10,7 @@ def load_model():
     try:
         return joblib.load('classification_model.pkl')
     except FileNotFoundError:
-        st.error("Model file not found. Please ensure 'random_forest_model.pkl' is in the correct directory.")
+        st.error("Model file not found. Please ensure 'classification_model.pkl' is in the correct directory.")
         st.stop()
     except Exception as e:
         st.error(f"An error occurred while loading the model: {e}")
